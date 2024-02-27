@@ -11,7 +11,7 @@ function ListNavigationItem({ list, selectedListId }: ListNavigationItemProps) {
   return (
     <div className={list.id === selectedListId ? styles.selectedList : styles.list}>
       <ChecklistIcon />
-      <span>{list.title}</span>
+      <span className={styles.titleContainer}>{list.title}</span>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 .list {
   display: flex;
-  align-items: center;
+  align-items: top;
   text-decoration: none;
   font-size: var(--mantine-font-size-sm);
   color: var(--mantine-color-white);
@@ -29,4 +29,19 @@
       }
     }
   }
+}
+
+.selectedList {
+  display: flex;
+  align-items: top;
+  text-decoration: none;
+  font-size: var(--mantine-font-size-sm);
+  color: var(--mantine-color-white);
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+  border-radius: var(--mantine-radius-sm);
+  font-weight: 1000;
+}
+
+.titleContainer {
+  margin-left: 10px;
 }
