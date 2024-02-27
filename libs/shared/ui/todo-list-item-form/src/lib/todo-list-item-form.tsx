@@ -26,12 +26,21 @@ function TodoListItemForm({ listId, item }: TodoListItemFormProps) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await store.createTodo({
-      title: formData.itemName,
-      description: formData.itemDescription,
-      listId,
-      isComplete: false,
-    });
+    if(item) {
+      await store.updateTodo({
+        ...item,
+        title: formData.itemName,
+        description: formData.itemDescription,
+      });
+      return;
+    } else {
+      await store.createTodo({
+        title: formData.itemName,
+        description: formData.itemDescription,
+        listId,
+        isComplete: false,
+      });
+    }
   };
 
   return (

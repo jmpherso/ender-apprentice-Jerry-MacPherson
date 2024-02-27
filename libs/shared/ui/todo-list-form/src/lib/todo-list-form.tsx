@@ -8,14 +8,19 @@ interface TodoListFormProps {
   list?: TodoListType;
 }
 
+interface FormData {
+  listName: string;
+  listDescription: string;
+}
+
 const TodoListForm = ({ list }: TodoListFormProps): JSX.Element => {
   const store = useTodoStore();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     listName: list ? list.title : '',
     listDescription: list ? list.description : '',
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -23,7 +28,7 @@ const TodoListForm = ({ list }: TodoListFormProps): JSX.Element => {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
     if (list) {

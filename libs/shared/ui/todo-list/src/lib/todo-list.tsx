@@ -54,10 +54,12 @@ function TodoList({ list }: TodoListProps) {
       </div>
       <div> {list.description} </div>
       <div className={styles.listItems}>
-        {list.items.length > 0 ? (
-          list.items.map((item) => <TodoListItem item={item} key={item.id} />)
+        {showCompleteItems ? (
+          list.items.map((item, index) => <TodoListItem key={index} item={item} />)
         ) : (
-          <p>No items to display.</p>
+          list.items
+            .filter((item) => !item.isComplete)
+            .map((item, index) => <TodoListItem key={index} item={item} />)
         )}
       </div>
       <Tooltip label="Add a new item to this list.">
