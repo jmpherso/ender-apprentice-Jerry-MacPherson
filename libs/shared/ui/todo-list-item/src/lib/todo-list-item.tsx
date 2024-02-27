@@ -65,7 +65,7 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
         </div>
       )}
       <Modal opened={modalOpened} onClose={closeModal} title="Edit item">
-        <TodoListItemForm listId={item.listId} />
+        <TodoListItemForm item={item} listId={item.listId} />
       </Modal>
     </div>
   );

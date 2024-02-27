@@ -2,6 +2,7 @@ import { Button, TextInput, Textarea } from '@mantine/core';
 import { useState } from 'react';
 import { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
 import { useTodoStore } from '@ender-apprentice/shared/stores/todo';
+import styles from './todo-list-item-form.module.css';
 
 type TodoListItemFormProps = {
   item?: TodoListItemType;
@@ -35,25 +36,31 @@ function TodoListItemForm({ listId, item }: TodoListItemFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextInput
-        label="Item Name"
-        placeholder="Enter item name"
-        value={formData.itemName}
-        onChange={handleChange}
-        name="itemName"
-        required
-      />
-      <Textarea
-        label="Item Description"
-        placeholder="Enter item description"
-        value={formData.itemDescription}
-        onChange={handleChange}
-        name="itemDescription"
-        rows={5}
-      />
-      <Button type="submit" variant="outline" color="blue">
-        Add Item
-      </Button>
+      <div className={styles.formContainer}>
+        <TextInput
+          label="Item Name"
+          placeholder="Enter item name"
+          value={formData.itemName}
+          onChange={handleChange}
+          name="itemName"
+          required
+        />
+      </div>
+      <div className={styles.formContainer}>
+        <Textarea
+          label="Item Description"
+          placeholder="Enter item description"
+          value={formData.itemDescription}
+          onChange={handleChange}
+          name="itemDescription"
+          rows={5}
+        />
+      </div>
+      <div className={styles.buttonContainer}>
+        <Button type="submit" variant="outline" color="blue">
+          {item ? 'Edit Item' : 'Add Item'}
+        </Button>
+      </div>
     </form>
   );
 }

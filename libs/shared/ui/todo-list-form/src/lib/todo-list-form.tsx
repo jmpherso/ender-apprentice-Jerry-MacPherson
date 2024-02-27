@@ -2,6 +2,7 @@ import { Button, TextInput, Textarea } from '@mantine/core';
 import { useState } from 'react';
 import { TodoListType } from '@ender-apprentice/shared/types/todo-list';
 import { useTodoStore } from '@ender-apprentice/shared/stores/todo';
+import styles from './todo-list-form.module.css';
 
 interface TodoListFormProps {
   list?: TodoListType;
@@ -39,6 +40,7 @@ const TodoListForm = ({ list }: TodoListFormProps): JSX.Element => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div className={styles.formContainer}>
       <TextInput
         label="List Name"
         placeholder="Enter list name"
@@ -47,6 +49,8 @@ const TodoListForm = ({ list }: TodoListFormProps): JSX.Element => {
         name="listName"
         required
       />
+      </div>
+      <div className={styles.formContainer}>
       <Textarea
         label="List Description"
         placeholder="Enter list description"
@@ -56,9 +60,12 @@ const TodoListForm = ({ list }: TodoListFormProps): JSX.Element => {
         rows={5}
         required
       />
-      <Button type="submit" variant="outline" color="blue">
-        {list ? 'Add list' : 'Save changes'}
-      </Button>
+      </div>
+      <div className={styles.buttonContainer}>
+        <Button type="submit" variant="outline" color="blue">
+          {list ? 'Save Changes' : 'Add list'}
+        </Button>
+      </div>
     </form>
   );
 };
