@@ -8,22 +8,22 @@ interface StoreState {
 }
 
 interface StoreActions {
-  getTodoList: () => Promise<TodoListType[]>;
-  getTodoListById: (id: number) => Promise<TodoListType | undefined>;
-  createTodo: (todo: Omit<TodoListItemType, 'id'> & { listId: number }) => Promise<TodoListItemType>;
-  updateTodo: (item: TodoListItemType) => Promise<void>;
-  createList: (list: Omit<TodoListType, 'id'>) => Promise<TodoListType>;
-  updateList: (list: TodoListType) => Promise<void>; // Added updateList function
+  getTodoList: () => TodoListType[];
+  getTodoListById: (id: number) => TodoListType | undefined;
+  createTodo: (todo: Omit<TodoListItemType, 'id'> & { listId: number }) => TodoListItemType;
+  updateTodo: (item: TodoListItemType) => void;
+  createList: (list: Omit<TodoListType, 'id'>) => TodoListType;
+  updateList: (list: TodoListType) => void; // Added updateList function
 }
 
 const useTodoStore = create<StoreState & StoreActions>((set, get) => ({
   todoListData: [...todoListData],
 
-  getTodoList: async () => get().todoListData,
+  getTodoList: () => get().todoListData,
 
-  getTodoListById: async (id) => get().todoListData.find((list) => list.id === id),
+  getTodoListById: (id) => get().todoListData.find((list) => list.id === id),
 
-  createTodo: async (todo) => {
+  createTodo: (todo) => {
     const newItemId = Date.now(); // Simple, more robust ID generation strategy
     const newItem: TodoListItemType = { ...todo, id: newItemId };
     set((state) => {
@@ -45,7 +45,7 @@ const useTodoStore = create<StoreState & StoreActions>((set, get) => ({
     return newItem;
   },
 
-  updateTodo: async (item) => {
+  updateTodo: (item) => {
     set((state) => {
       const listIndex = state.todoListData.findIndex((list) => list.id === item.listId);
       if (listIndex !== -1) {
@@ -67,7 +67,7 @@ const useTodoStore = create<StoreState & StoreActions>((set, get) => ({
     });
   },
 
-  createList: async (list) => {
+  createList: (list) => {
     const newListId = Date.now(); // Simple, more robust ID generation strategy
     const newList: TodoListType = { ...list, id: newListId, items: [] };
     set((state) => ({
@@ -77,7 +77,7 @@ const useTodoStore = create<StoreState & StoreActions>((set, get) => ({
     return newList;
   },
 
-  updateList: async (updatedList) => {
+  updateList: (updatedList) => {
     set((state) => {
       const listIndex = state.todoListData.findIndex((list) => list.id === updatedList.id);
       if (listIndex !== -1) {
