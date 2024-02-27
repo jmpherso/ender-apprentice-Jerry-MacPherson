@@ -1,0 +1,8 @@
+{
+  "name": "shared-ui-list-navigation",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui/list-navigation/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {}
+}

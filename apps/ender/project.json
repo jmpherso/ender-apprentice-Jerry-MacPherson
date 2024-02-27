@@ -1,0 +1,8 @@
+{
+  "name": "ender",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ender/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}

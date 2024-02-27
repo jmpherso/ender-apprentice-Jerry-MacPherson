@@ -1,0 +1,15 @@
+.homePageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  justify-content: space-around;
+  margin: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.appContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

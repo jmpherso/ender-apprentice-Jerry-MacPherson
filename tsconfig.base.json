@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ender-apprentice/pages/home": ["libs/pages/home/src/index.ts"],
+      "@ender-apprentice/shared/data/todo-list": ["libs/shared/data/todo-list/src/index.ts"],
+      "@ender-apprentice/shared/stores/todo": ["libs/shared/stores/todo/src/index.ts"],
+      "@ender-apprentice/shared/types/todo-list": ["libs/shared/types/todo-list/src/index.ts"],
+      "@ender-apprentice/shared/types/todo-list-item": ["libs/shared/types/todo-list-item/src/index.ts"],
+      "@ender-apprentice/shared/ui/list-navigation": ["libs/shared/ui/list-navigation/src/index.ts"],
+      "@ender-apprentice/shared/ui/list-navigation-item": ["libs/shared/ui/list-navigation-item/src/index.ts"],
+      "@ender-apprentice/shared/ui/modal": ["libs/shared/ui/modal/src/index.ts"],
+      "@ender-apprentice/shared/ui/modal2": ["libs/shared/ui/modal2/src/index.ts"],
+      "@ender-apprentice/shared/ui/todo-list": ["libs/shared/ui/todo-list/src/index.ts"],
+      "@ender-apprentice/shared/ui/todo-list-form": ["libs/shared/ui/todo-list-form/src/index.ts"],
+      "@ender-apprentice/shared/ui/todo-list-item": ["libs/shared/ui/todo-list-item/src/index.ts"],
+      "@ender-apprentice/shared/ui/todo-list-item-form": ["libs/shared/ui/todo-list-item-form/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

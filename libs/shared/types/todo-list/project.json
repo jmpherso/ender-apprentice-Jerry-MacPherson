@@ -1,0 +1,19 @@
+{
+  "name": "shared-types-todo-list",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/types/todo-list/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/types/todo-list",
+        "main": "libs/shared/types/todo-list/src/index.ts",
+        "tsConfig": "libs/shared/types/todo-list/tsconfig.lib.json",
+        "assets": ["libs/shared/types/todo-list/*.md"]
+      }
+    }
+  },
+  "tags": []
+}

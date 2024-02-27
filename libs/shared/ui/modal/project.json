@@ -1,0 +1,8 @@
+{
+  "name": "shared-ui-modal",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui/modal/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {}
+}

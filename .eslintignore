@@ -1,0 +1,25 @@
+*.min.*
+bin/
+dist/
+node_modules/
+tmp/
+**/package-lock.json
+**/pnpm-lock.yaml
+
+# lambdas
+serverless/
+
+# temporary, WP needs some love to pass
+wordpress.ender.com/
+
+# Ignore until we convert to React
+common.ender.com/
+talent.ender.com/
+listings.ender.com/
+
+# Ignore all nx generated json files
+libs/**/*.json
+apps/**/*.json
+ender.com/src/**/*.json
+**/vite.config.ts
+**/tsconfig.json

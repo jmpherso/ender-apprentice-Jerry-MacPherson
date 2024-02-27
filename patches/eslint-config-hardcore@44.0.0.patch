@@ -1,0 +1,13 @@
+diff --git a/react.json b/react.json
+index 116c690970b9c889b6b4a84bbbe4252a3c52010a..9ad6f4b9ce4c7a8347c09a5956c8b405861940d6 100644
+--- a/react.json
++++ b/react.json
+@@ -73,7 +73,7 @@
+       { "destructureInSignature": "always" }
+     ],
+     "react/jsx-no-leaked-render": ["error", { "validStrategies": ["coerce"] }],
+-    "react/display-name": ["error", { "checkContextObjects": true }],
++    "react/display-name": ["error"],
+ 
+     "react-hooks/exhaustive-deps": "error",
+ 

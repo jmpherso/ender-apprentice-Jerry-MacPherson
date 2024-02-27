@@ -1,0 +1,24 @@
+.navbar {
+  height: 500px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--mantine-color-blue-filled);
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 8px 16px;
+}
+
+.navbarMain {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.navHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "shared-stores-todo",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/stores/todo/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/stores/todo",
+        "main": "libs/shared/stores/todo/src/index.ts",
+        "tsConfig": "libs/shared/stores/todo/tsconfig.lib.json",
+        "assets": ["libs/shared/stores/todo/*.md"]
+      }
+    }
+  },
+  "tags": []
+}

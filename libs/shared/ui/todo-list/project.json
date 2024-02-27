@@ -1,0 +1,8 @@
+{
+  "name": "shared-ui-todo-list",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui/todo-list/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {}
+}
