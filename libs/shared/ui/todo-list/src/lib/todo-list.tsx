@@ -34,7 +34,7 @@ function TodoList({ list }: TodoListProps) {
     setListItemModalOpened(false);
   };
 
-  const toggleCompleteItemVisibility = (event) => {
+  const toggleCompleteItemVisibility = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     setShowCompleteItems(!showCompleteItems);
   };
