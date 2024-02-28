@@ -42,8 +42,8 @@ function ListNavigation({ lists, selectedListId, changeSelectedListId }: ListNav
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline">
-                <AddIcon onClick={openModal} />
+              <Button data-testid="add-list-button" onClick={openModal} variant="outline">
+                <AddIcon/>
               </Button>
             </TooltipTrigger>
             <TooltipContent>

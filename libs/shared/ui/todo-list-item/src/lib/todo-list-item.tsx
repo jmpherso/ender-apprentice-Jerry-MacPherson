@@ -50,7 +50,7 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
         <div className={styles.previewInfo}>
           <EditIcon onClick={openModal} />
           {detailsVisible ? (
-            <KeyboardArrowUpIcon onClick={hideDetails} />
+            <KeyboardArrowUpIcon data-testid="arrow button" onClick={hideDetails} />
           ) : (
             <KeyboardArrowDownIcon onClick={showDetails} />
           )}

@@ -35,13 +35,13 @@ function TodoListItemForm({ listId, item, closeModal }: TodoListItemFormProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if(item) {
-      await store.updateTodo({
+      store.updateTodo({
         ...item,
         title: formData.itemName,
         description: formData.itemDescription,
       });
     } else {
-      await store.createTodo({
+      store.createTodo({
         title: formData.itemName,
         description: formData.itemDescription,
         listId,
@@ -55,7 +55,7 @@ function TodoListItemForm({ listId, item, closeModal }: TodoListItemFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form data-testid="todo-item-form" onSubmit={handleSubmit}>
       <div className={styles.formContainer}>
         <TextInput
           label="Item Name"
