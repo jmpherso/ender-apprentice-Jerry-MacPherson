@@ -46,7 +46,7 @@ function ListNavigation({ lists, selectedListId, changeSelectedListId }: ListNav
       </div>
       <div className={styles.navbarMain}>{navList}</div>
       <Modal opened={modalOpened} onClose={closeModal} title={'New list'}>
-        <TodoListForm />
+        <TodoListForm closeModal={closeModal}/>
       </Modal>
     </nav>
   );

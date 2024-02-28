@@ -68,10 +68,10 @@ function TodoList({ list }: TodoListProps) {
         </Button>
       </Tooltip>
       <Modal onClose={closeListModal} opened={listModalOpened} title={'Edit list'}>
-        <TodoListForm list={list} />
+        <TodoListForm closeModal={closeListModal} list={list} />
       </Modal>
       <Modal onClose={closeListItemModal} opened={listItemModalOpened} title={'Add item'}>
-        <TodoListItemForm listId={list.id} />
+        <TodoListItemForm closeModal={closeListItemModal} listId={list.id} />
       </Modal>
     </div>
   );

@@ -6,6 +6,7 @@ import styles from './todo-list-form.module.css';
 
 interface TodoListFormProps {
   list?: TodoListType;
+  closeModal?: () => void;
 }
 
 interface FormData {
@@ -13,7 +14,7 @@ interface FormData {
   listDescription: string;
 }
 
-const TodoListForm = ({ list }: TodoListFormProps): JSX.Element => {
+const TodoListForm = ({ list, closeModal }: TodoListFormProps): JSX.Element => {
   const store = useTodoStore();
   const [formData, setFormData] = useState<FormData>({
     listName: list ? list.title : '',
@@ -31,15 +32,21 @@ const TodoListForm = ({ list }: TodoListFormProps): JSX.Element => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    if (list) {
-      list.description = formData.listDescription;
-      list.title = formData.listName;
-    } else {
-      await store.createList({
+    if(list) {
+      store.updateList({
+        ...list,
         title: formData.listName,
         description: formData.listDescription,
-        items: [],
       });
+    } else {
+      store.createList({
+        title: formData.listName,
+        description: formData.listDescription,
+        items: []
+      });
+    }
+    if (closeModal) {
+      closeModal();
     }
   };
 

@@ -14,7 +14,7 @@ type TodoListItemProps = {
 
 const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
   const store = useTodoStore();
-  const [detailsVisible, setDetailsVisible] = useState(false);
+  const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
   const [modalOpened, setModalOpened] = useState<boolean>(false);
 
   const openModal = (): void => {
@@ -33,7 +33,7 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
     setDetailsVisible(false);
   };
 
-  const toggleItemComplete = async () => {
+  const toggleItemComplete = async (): Promise<void> => {
     await store.updateTodo({
       ...item,
       isComplete: !item.isComplete,
@@ -65,7 +65,7 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
         </div>
       )}
       <Modal opened={modalOpened} onClose={closeModal} title="Edit item">
-        <TodoListItemForm item={item} listId={item.listId} />
+        <TodoListItemForm item={item} listId={item.listId} closeModal={closeModal} />
       </Modal>
     </div>
   );

@@ -7,16 +7,22 @@ import styles from './todo-list-item-form.module.css';
 type TodoListItemFormProps = {
   item?: TodoListItemType;
   listId: number;
+  closeModal?: () => void
 };
 
-function TodoListItemForm({ listId, item }: TodoListItemFormProps) {
+interface FormData {
+  itemName: string;
+  itemDescription: string;
+}
+
+function TodoListItemForm({ listId, item, closeModal }: TodoListItemFormProps) {
   const store = useTodoStore();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     itemName: item ? item.title : '',
     itemDescription: item ? item.description : '',
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -24,7 +30,7 @@ function TodoListItemForm({ listId, item }: TodoListItemFormProps) {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if(item) {
       await store.updateTodo({
@@ -32,7 +38,6 @@ function TodoListItemForm({ listId, item }: TodoListItemFormProps) {
         title: formData.itemName,
         description: formData.itemDescription,
       });
-      return;
     } else {
       await store.createTodo({
         title: formData.itemName,
@@ -40,6 +45,10 @@ function TodoListItemForm({ listId, item }: TodoListItemFormProps) {
         listId,
         isComplete: false,
       });
+    }
+
+    if (closeModal) {
+      closeModal();
     }
   };
 
