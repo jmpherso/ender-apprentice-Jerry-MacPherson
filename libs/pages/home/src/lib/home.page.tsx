@@ -5,7 +5,7 @@ import { TodoList } from '@ender-apprentice/shared/ui/todo-list';
 import { useEffect, useState } from 'react';
 import styles from './home.page.module.css';
 
-function Home() {
+function Home(): JSX.Element {
   const store = useTodoStore();
   const [lists, setLists] = useState<TodoListType[]>([]);
   const [selectedListId, setSelectedListId] = useState<number>(0);
@@ -30,7 +30,7 @@ function Home() {
       <h1>To-do List Manager</h1>
       <div className={styles.appContainer}>
         <ListNavigation changeSelectedListId={changeSelectedListId} lists={lists} selectedListId={selectedListId} />
-        <TodoList list={lists[selectedListId]} />
+        <TodoList list={lists[selectedListId]}  />
       </div>
     </div>
   );

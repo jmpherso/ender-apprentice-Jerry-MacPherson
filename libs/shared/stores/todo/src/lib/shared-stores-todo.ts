@@ -13,7 +13,7 @@ interface StoreActions {
   createTodo: (todo: Omit<TodoListItemType, 'id'> & { listId: number }) => TodoListItemType;
   updateTodo: (item: TodoListItemType) => void;
   createList: (list: Omit<TodoListType, 'id'>) => TodoListType;
-  updateList: (list: TodoListType) => void; // Added updateList function
+  updateList: (list: TodoListType) => void;
 }
 
 const useTodoStore = create<StoreState & StoreActions>((set, get) => ({
@@ -23,14 +23,17 @@ const useTodoStore = create<StoreState & StoreActions>((set, get) => ({
 
   getTodoListById: (id) => get().todoListData.find((list) => list.id === id),
 
-  createTodo: (todo) => {
-    const newItemId = Date.now(); // Simple, more robust ID generation strategy
-    const newItem: TodoListItemType = { ...todo, id: newItemId };
+  createTodo: (todo: Omit<TodoListItemType, 'id'> & { listId: number }) => {
+    let newItemId = 0;
     set((state) => {
+      newItemId = Date.now();
+      const newItem: TodoListItemType = { ...todo, id: newItemId };
+
       const listIndex = state.todoListData.findIndex((list) => list.id === todo.listId);
       if (listIndex !== -1) {
         const newList = { ...state.todoListData[listIndex] };
-        newList.items = [...newList.items, newItem];
+        newList.items = newList.items ? [...newList.items, newItem] : [newItem];
+
         return {
           ...state,
           todoListData: [
@@ -42,14 +45,15 @@ const useTodoStore = create<StoreState & StoreActions>((set, get) => ({
       }
       return state;
     });
-    return newItem;
+
+    return { ...todo, id: newItemId };
   },
 
   updateTodo: (item) => {
     set((state) => {
       const listIndex = state.todoListData.findIndex((list) => list.id === item.listId);
       if (listIndex !== -1) {
-        const itemIndex = state.todoListData[listIndex].items.findIndex((i) => i.id === item.id);
+        const itemIndex = state.todoListData[listIndex]?.items.findIndex((i) => i.id === item.id);
         if (itemIndex !== -1) {
           const newList = { ...state.todoListData[listIndex] };
           newList.items = [...newList.items.slice(0, itemIndex), item, ...newList.items.slice(itemIndex + 1)];
@@ -67,14 +71,19 @@ const useTodoStore = create<StoreState & StoreActions>((set, get) => ({
     });
   },
 
-  createList: (list) => {
-    const newListId = Date.now(); // Simple, more robust ID generation strategy
-    const newList: TodoListType = { ...list, id: newListId, items: [] };
-    set((state) => ({
-      ...state,
-      todoListData: [...state.todoListData, newList],
-    }));
-    return newList;
+  createList: (list: Omit<TodoListType, 'id'>) => {
+    let newId = 0;
+    set((state) => {
+      newId = state.todoListData.reduce((maxId, list) => Math.max(list.id, maxId), -1) + 1;
+      const newList = { ...list, id: newId };
+
+      return {
+        ...state,
+        todoListData: [...state.todoListData, newList],
+      };
+    });
+
+    return { ...list, id: newId };
   },
 
   updateList: (updatedList) => {
