@@ -1,6 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import styles from './list-navigation.module.css';
-import { Button, Tooltip } from '@mantine/core';
+import { Button} from "../../../../../../components/ui/button"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../../../../../components/ui/tooltip"
 import { useState } from 'react';
 import { Modal } from '@ender-apprentice/shared/ui/modal';
 import { TodoListType } from '@ender-apprentice/shared/types/todo-list';
@@ -38,11 +39,18 @@ function ListNavigation({ lists, selectedListId, changeSelectedListId }: ListNav
     <nav className={styles.navbar}>
       <div className={styles.navHeader}>
         <h2>All Lists</h2>
-        <Tooltip label="Add new to-do list">
-          <Button size="sm" variant="outline" onClick={openModal}>
-            <AddIcon />
-          </Button>
-        </Tooltip>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline">
+                <AddIcon onClick={openModal} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className={styles.tooltipContent}>Add new list</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
       <div className={styles.navbarMain}>{navList}</div>
       <Modal opened={modalOpened} onClose={closeModal} title={'New list'}>
