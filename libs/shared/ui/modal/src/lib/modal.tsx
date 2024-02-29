@@ -1,19 +1,20 @@
-import { Modal as MantineModal, ModalProps as MantineModalProps } from '@mantine/core';
+import { Modal as MantineModal } from '@mantine/core';
+import type { ModalProps as MantineModalProps } from '@mantine/core';
 
-type ModalProps = MantineModalProps & {
+interface ModalProps extends MantineModalProps {
   title: string;
-};
+}
 
-function Modal(props: ModalProps) {
+function Modal(props: Readonly<ModalProps>) {
   const { title, children, closeOnClickOutside = true, ...modalProps } = props;
 
   return (
     <MantineModal
       {...modalProps}
-      title={title}
-      overlayOpacity={0.5}
+      closeButtonLabel="Exit"
       closeOnClickOutside={closeOnClickOutside}
-      closeButtonLabel="Exit">
+      overlayOpacity={0.5}
+      title={title}>
       {children}
     </MantineModal>
   );

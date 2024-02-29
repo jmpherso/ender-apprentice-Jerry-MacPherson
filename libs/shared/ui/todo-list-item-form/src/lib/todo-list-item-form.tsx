@@ -1,50 +1,51 @@
-import { TextInput, Textarea } from '@mantine/core';
+import type { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
 import { Button } from '../../../../../../components/ui/button';
+import { TextInput, Textarea } from '@mantine/core';
 import { useState } from 'react';
-import { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
 import { useTodoStore } from '@ender-apprentice/shared/stores/todo';
 import styles from './todo-list-item-form.module.css';
 
-type TodoListItemFormProps = {
-  item?: TodoListItemType;
-  listId: number;
-  closeModal?: () => void;
-};
-
-interface FormData {
-  itemName: string;
-  itemDescription: string;
+interface TodoListItemFormProps {
+  readonly closeModal?: () => void;
+  readonly item?: TodoListItemType;
+  readonly listId: number;
 }
 
-function TodoListItemForm({ listId, item, closeModal }: TodoListItemFormProps) {
+interface FormData {
+  readonly itemDescription: string;
+  readonly itemName: string;
+}
+
+function TodoListItemForm({ closeModal, item, listId }: Readonly<TodoListItemFormProps>) {
   const store = useTodoStore();
   const [formData, setFormData] = useState<FormData>({
-    itemName: item ? item.title : '',
     itemDescription: item ? item.description : '',
+    itemName: item ? item.title : '',
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChange = (event: Readonly<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>): void => {
     const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
+
+    setFormData((previousState) => ({
+      ...previousState,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = (event: Readonly<React.FormEvent<HTMLFormElement>>): void => {
     event.preventDefault();
     if (item) {
       store.updateTodo({
         ...item,
-        title: formData.itemName,
         description: formData.itemDescription,
+        title: formData.itemName,
       });
     } else {
       store.createTodo({
-        title: formData.itemName,
         description: formData.itemDescription,
-        listId,
         isComplete: false,
+        listId,
+        title: formData.itemName,
       });
     }
 
@@ -58,25 +59,25 @@ function TodoListItemForm({ listId, item, closeModal }: TodoListItemFormProps) {
       <div className={styles.formContainer}>
         <TextInput
           label="Item Name"
-          placeholder="Enter item name"
-          value={formData.itemName}
-          onChange={handleChange}
           name="itemName"
+          onChange={handleChange}
+          placeholder="Enter item name"
           required
+          value={formData.itemName}
         />
       </div>
       <div className={styles.formContainer}>
         <Textarea
           label="Item Description"
-          placeholder="Enter item description"
-          value={formData.itemDescription}
-          onChange={handleChange}
           name="itemDescription"
+          onChange={handleChange}
+          placeholder="Enter item description"
           rows={5}
+          value={formData.itemDescription}
         />
       </div>
       <div className={styles.buttonContainer}>
-        <Button type="submit" variant="outline" color="blue">
+        <Button color="blue" type="submit" variant="outline">
           {item ? 'Edit Item' : 'Add Item'}
         </Button>
       </div>

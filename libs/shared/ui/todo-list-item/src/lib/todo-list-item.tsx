@@ -15,8 +15,8 @@ interface TodoListItemProps {
 
 const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
   const store = useTodoStore();
-  const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
-  const [modalOpened, setModalOpened] = useState<boolean>(false);
+  const [isDetailsVisible, setDetailsVisible] = useState<boolean>(false);
+  const [isModalOpened, setModalOpened] = useState<boolean>(false);
 
   const openModal = (): void => {
     setModalOpened(true);
@@ -34,8 +34,8 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
     setDetailsVisible(false);
   };
 
-  const toggleItemComplete = async (): Promise<void> => {
-    await store.updateTodo({
+  const toggleItemComplete = (): void => {
+    store.updateTodo({
       ...item,
       isComplete: !item.isComplete,
     });
@@ -50,14 +50,14 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
         </div>
         <div className={styles.previewInfo}>
           <EditIcon onClick={openModal} />
-          {detailsVisible ? (
+          {isDetailsVisible ? (
             <KeyboardArrowUpIcon data-testid="arrow button" onClick={hideDetails} />
           ) : (
             <KeyboardArrowDownIcon onClick={showDetails} />
           )}
         </div>
       </div>
-      {detailsVisible && (
+      {isDetailsVisible && (
         <div className={styles.detailsContainer}>
           <div>
             {item.description}
@@ -65,7 +65,7 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
           </div>
         </div>
       )}
-      <Modal onClose={closeModal} opened={modalOpened} title="Edit item">
+      <Modal onClose={closeModal} opened={isModalOpened} title="Edit item">
         <TodoListItemForm closeModal={closeModal} item={item} listId={item.listId} />
       </Modal>
     </div>

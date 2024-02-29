@@ -1,9 +1,9 @@
 interface TodoListItemType {
-  description: string;
-  id: number;
-  isComplete: boolean;
-  listId: number;
-  title: string;
+  readonly description: string;
+  readonly id: number;
+  readonly isComplete: boolean;
+  readonly listId: number;
+  readonly title: string;
 }
 
 export type { TodoListItemType };

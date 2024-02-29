@@ -10,13 +10,13 @@ import { useState } from 'react';
 import styles from './todo-list.module.css';
 
 interface TodoListProps {
-  list: TodoListType;
+  readonly list: TodoListType;
 }
 
-function TodoList({ list }: TodoListProps) {
-  const [showCompleteItems, setShowCompleteItems] = useState<boolean>(true);
-  const [listModalOpened, setListModalOpened] = useState<boolean>(false);
-  const [listItemModalOpened, setListItemModalOpened] = useState<boolean>(false);
+function TodoList({ list }: Readonly<TodoListProps>) {
+  const [isShowCompleteItems, setShowCompleteItems] = useState<boolean>(true);
+  const [isListModalOpened, setListModalOpened] = useState<boolean>(false);
+  const [isListItemModalOpened, setListItemModalOpened] = useState<boolean>(false);
 
   const openListModal = (): void => {
     setListModalOpened(true);
@@ -34,9 +34,9 @@ function TodoList({ list }: TodoListProps) {
     setListItemModalOpened(false);
   };
 
-  const toggleCompleteItemVisibility = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const toggleCompleteItemVisibility = (event: Readonly<React.MouseEvent<HTMLButtonElement>>): void => {
     event.preventDefault();
-    setShowCompleteItems(!showCompleteItems);
+    setShowCompleteItems(!isShowCompleteItems);
   };
 
   return (
@@ -45,7 +45,7 @@ function TodoList({ list }: TodoListProps) {
         <h2>{list.title}</h2>
         <div className={styles.buttonContainer}>
           <Button onClick={toggleCompleteItemVisibility} size="sm" variant="outline">
-            {showCompleteItems ? 'Hide' : 'Show'} Complete
+            {isShowCompleteItems ? 'Hide' : 'Show'} Complete
           </Button>
           <Button onClick={openListModal} size="sm" variant="default">
             Edit details
@@ -54,7 +54,7 @@ function TodoList({ list }: TodoListProps) {
       </div>
       <div> {list.description} </div>
       <div className={styles.listItems}>
-        {showCompleteItems
+        {isShowCompleteItems
           ? list.items.map((item, index) => <TodoListItem item={item} key={index} />)
           : list.items
               .filter((item) => !item.isComplete)
@@ -72,10 +72,10 @@ function TodoList({ list }: TodoListProps) {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <Modal onClose={closeListModal} opened={listModalOpened} title={'Edit list'}>
+      <Modal onClose={closeListModal} opened={isListModalOpened} title={'Edit list'}>
         <TodoListForm closeModal={closeListModal} list={list} />
       </Modal>
-      <Modal onClose={closeListItemModal} opened={listItemModalOpened} title={'Add item'}>
+      <Modal onClose={closeListItemModal} opened={isListItemModalOpened} title={'Add item'}>
         <TodoListItemForm closeModal={closeListItemModal} listId={list.id} />
       </Modal>
     </div>

@@ -30,7 +30,7 @@ describe('TodoListForm', () => {
     render(<TodoListForm />);
     expect(screen.getByLabelText(/List Name/)).toBeInTheDocument();
     expect(screen.getByLabelText(/List Description/)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Add list' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add List' })).toBeInTheDocument();
   });
 
   it('renders correctly for editing an existing list', () => {
@@ -59,7 +59,7 @@ describe('TodoListForm', () => {
 
     fireEvent.change(screen.getByLabelText(/List Name/), { target: { value: 'New List' } });
     fireEvent.change(screen.getByLabelText(/List Description/), { target: { value: 'New Description' } });
-    fireEvent.submit(screen.getByRole('button', { name: 'Add list' }));
+    fireEvent.submit(screen.getByRole('button', { name: 'Add List' }));
 
     expect(createList).toHaveBeenCalledWith({
       title: 'New List',

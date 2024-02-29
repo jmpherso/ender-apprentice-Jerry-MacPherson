@@ -4,11 +4,11 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import styles from './list-navigation-item.module.css';
 
 interface ListNavigationItemProps {
-  list: TodoListType;
-  selectedListId: number;
+  readonly list: TodoListType;
+  readonly selectedListId: number;
 }
 
-function ListNavigationItem({ list, selectedListId }: ListNavigationItemProps) {
+function ListNavigationItem({ list, selectedListId }: Readonly<ListNavigationItemProps>) {
   return (
     <div className={list.id === selectedListId ? styles.selectedList : styles.list}>
       <ChecklistIcon />
