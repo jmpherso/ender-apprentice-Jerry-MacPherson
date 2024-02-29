@@ -17,7 +17,7 @@ vi.mock('@ender-apprentice/shared/ui/todo-list-item', () => ({
 vi.mock('@ender-apprentice/shared/ui/todo-list-item-form', () => ({
   TodoListItemForm: () => <div>TodoListItemForm</div>,
 }));
-vi.mock('../../../../../../components/ui/button', () => ({
+vi.mock('@/components/ui/button', () => ({
   Button: ({ onClick, children }) => <button onClick={onClick}>{children}</button>,
 }));
 vi.mock('@mui/icons-material/Add', () => ({

@@ -5,17 +5,6 @@ import { useTodoStore } from '@ender-apprentice/shared/stores/todo';
 import { TodoListType } from '@ender-apprentice/shared/types/todo-list';
 import { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
 
-//VITEST testing suite for shared todo stores, and methods.
-//For reference
-/**interface StoreActions {
-  getTodoList: () => TodoListType[];
-  getTodoListById: (id: number) => TodoListType | undefined;
-  createTodo: (todo: Omit<TodoListItemType, 'id'> & { listId: number }) => TodoListItemType;
-  updateTodo: (item: TodoListItemType) => void;
-  createList: (list: Omit<TodoListType, 'id'>) => TodoListType;
-  updateList: (list: TodoListType) => void;
-} */
-
 //Mocking the store
 vi.mock('@ender-apprentice/shared/stores/todo', () => ({
   useTodoStore: vi.fn(),
