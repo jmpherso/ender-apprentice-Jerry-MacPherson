@@ -1,9 +1,9 @@
-type TodoListItemType = {
-  title: string;
-  id: number;
+interface TodoListItemType {
   description: string;
-  listId: number;
+  id: number;
   isComplete: boolean;
-};
+  listId: number;
+  title: string;
+}
 
 export type { TodoListItemType };

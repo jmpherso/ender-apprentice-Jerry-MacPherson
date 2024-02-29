@@ -1,86 +1,92 @@
-import { TextInput, Textarea } from '@mantine/core';
-import { Button} from "../../../../../../components/ui/button"
-import { useState } from 'react';
-import { TodoListType } from '@ender-apprentice/shared/types/todo-list';
-import { useTodoStore } from '@ender-apprentice/shared/stores/todo';
+import {useTodoStore} from '@ender-apprentice/shared/stores/todo';
+import {TodoListType} from '@ender-apprentice/shared/types/todo-list';
+import {Textarea, TextInput} from '@mantine/core';
+import {useState} from 'react';
+import {Button} from '../../../../../../components/ui/button';
 import styles from './todo-list-form.module.css';
 
 interface TodoListFormProps {
-  list?: TodoListType;
-  closeModal?: () => void;
+    closeModal?: () => void;
+    list?: TodoListType;
 }
 
 interface FormData {
-  listName: string;
-  listDescription: string;
+    listDescription: string;
+    listName: string;
 }
 
-const TodoListForm = ({ list, closeModal }: TodoListFormProps): JSX.Element => {
-  const store = useTodoStore();
-  const [formData, setFormData] = useState<FormData>({
-    listName: list ? list.title : '',
-    listDescription: list ? list.description : '',
-  });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-
-    if(list) {
-      store.updateList({
-        ...list,
-        title: formData.listName,
-        description: formData.listDescription,
-      });
-    } else {
-      store.createList({
-        title: formData.listName,
-        description: formData.listDescription,
-        items: []
-      });
-    }
-    if (closeModal) {
-      closeModal();
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className={styles.formContainer}>
-      <TextInput
-        label="List Name"
-        placeholder="Enter list name"
-        value={formData.listName}
-        onChange={handleChange}
-        name="listName"
-        required
-      />
-      </div>
-      <div className={styles.formContainer}>
-      <Textarea
-        label="List Description"
-        placeholder="Enter list description"
-        value={formData.listDescription}
-        onChange={handleChange}
-        name="listDescription"
-        rows={5}
-        required
-      />
-      </div>
-      <div className={styles.buttonContainer}>
-        <Button type="submit" variant="outline" color="blue">
-          {list ? 'Save Changes' : 'Add list'}
+const TodoListForm = ({closeModal, list}): JSX.Element => {
+    const store = useTodoStore();
+    const [formData, setFormData] = useState<FormData>({
+        listDescription: list ? list.description : '',
+        listName: list ? list.title : '',
+    });
+    
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        const {name, value} = event.target;
+        
+        setFormData((previousState) => ({
+            ...previousState,
+            [name]: value,
+        }));
+    };
+    
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+        event.preventDefault();
+        
+        if (list) {
+            store.updateList({
+                ...list,
+                description: formData.listDescription,
+                title: formData.listName,
+            });
+        }
+ else {
+            store.createList({
+                description: formData.listDescription,
+                items: [],
+                title: formData.listName,
+            });
+        }
+        
+        if (closeModal) {
+            closeModal();
+        }
+    };
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            <div className={styles.formContainer}>
+            <TextInput
+                label="List Name"
+                name="listName"
+                onChange={handleChange}
+                placeholder="Enter list name"
+                required
+                value={formData.listName}
+            />
+        </div>
+            <div className={styles.formContainer}>
+            <Textarea
+                label="List Description"
+                name="listDescription"
+                onChange={handleChange}
+                placeholder="Enter list description"
+                required
+                rows={5}
+                value={formData.listDescription}
+            />
+        </div>
+            <div className={styles.buttonContainer}>
+            <Button color="blue" type="submit" variant="outline">
+            {list ? 'Save Changes' : 'Add list'}
         </Button>
-      </div>
-    </form>
-  );
+        </div>
+        </form>
+    );
 };
 
-export { TodoListForm };
+export {
+    TodoListForm,
+};
+

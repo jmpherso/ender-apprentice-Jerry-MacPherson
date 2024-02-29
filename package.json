@@ -86,5 +86,6 @@
     "patchedDependencies": {
       "eslint-config-hardcore@44.0.0": "patches/eslint-config-hardcore@44.0.0.patch"
     }
-  }
+  },
+  "eslintIgnore": ["*.spec.tsx"]
 }

@@ -1,10 +1,10 @@
-import { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
+import type { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
 
-type TodoListType = {
-  title: string;
-  id: number;
+interface TodoListType {
   description: string;
+  id: number;
   items: TodoListItemType[];
-};
+  title: string;
+}
 
 export type { TodoListType };

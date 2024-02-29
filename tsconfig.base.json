@@ -20,7 +20,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
+      //"@/*": ["./*"],
       "@ender-apprentice/pages/home": ["libs/pages/home/src/index.ts"],
       "@ender-apprentice/shared/data/todo-list": ["libs/shared/data/todo-list/src/index.ts"],
       "@ender-apprentice/shared/stores/todo": ["libs/shared/stores/todo/src/index.ts"],

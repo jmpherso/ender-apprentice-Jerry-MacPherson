@@ -2,7 +2,11 @@
   "name": "@ender-apprentice/shared/stores/todo",
   "version": "0.0.1",
   "dependencies": {
-    "@swc/helpers": "~0.5.2"
+    "@swc/helpers": "~0.5.2",
+    "zustand": "^4.5.1",
+    "@ender-apprentice/shared/types/todo-list": "0.0.1",
+    "@ender-apprentice/shared/types/todo-list-item": "0.0.1",
+    "@ender-apprentice/shared/data/todo-list": "0.0.1"
   },
   "type": "commonjs",
   "main": "./src/index.js",

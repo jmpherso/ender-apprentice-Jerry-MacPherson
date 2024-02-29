@@ -1,16 +1,17 @@
-import { useState } from 'react';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import EditIcon from '@mui/icons-material/Edit';
-import styles from './todo-list-item.module.css';
-import { Modal } from '@ender-apprentice/shared/ui/modal';
-import { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
-import { TodoListItemForm } from '@ender-apprentice/shared/ui/todo-list-item-form';
 import { useTodoStore } from '@ender-apprentice/shared/stores/todo';
+import type { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
+import { Modal } from '@ender-apprentice/shared/ui/modal';
+import { TodoListItemForm } from '@ender-apprentice/shared/ui/todo-list-item-form';
+import EditIcon from '@mui/icons-material/Edit';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useState } from 'react';
 
-type TodoListItemProps = {
+import styles from './todo-list-item.module.css';
+
+interface TodoListItemProps {
   item: TodoListItemType;
-};
+}
 
 const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
   const store = useTodoStore();
@@ -44,7 +45,7 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
     <div className={styles.todoListItemContainer}>
       <div className={styles.collapsedView}>
         <div className={styles.previewInfo}>
-          <input type="checkbox" checked={item.isComplete} onChange={toggleItemComplete} />
+          <input checked={item.isComplete} onChange={toggleItemComplete} type="checkbox" />
           <div>{item.title}</div>
         </div>
         <div className={styles.previewInfo}>
@@ -60,12 +61,12 @@ const TodoListItem = ({ item }: TodoListItemProps): JSX.Element => {
         <div className={styles.detailsContainer}>
           <div>
             {item.description}
-            {!item.description.length && 'No details to display.'}
+            {item.description.length === 0 && 'No details to display.'}
           </div>
         </div>
       )}
-      <Modal opened={modalOpened} onClose={closeModal} title="Edit item">
-        <TodoListItemForm item={item} listId={item.listId} closeModal={closeModal} />
+      <Modal onClose={closeModal} opened={modalOpened} title="Edit item">
+        <TodoListItemForm closeModal={closeModal} item={item} listId={item.listId} />
       </Modal>
     </div>
   );

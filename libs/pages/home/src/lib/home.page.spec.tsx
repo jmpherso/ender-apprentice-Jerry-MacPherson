@@ -1,24 +1,28 @@
 // Import necessary tools and components
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import '@testing-library/jest-dom';
+
 import { useTodoStore } from '@ender-apprentice/shared/stores/todo';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom'; // for expect(...).toBeInTheDocument()
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+// for expect(...).toBeInTheDocument()
 import { Home } from './home.page';
 
-//Workaround for window.matchMedia error
+// Workaround for window.matchMedia error
 Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: (query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: () => {},
-    removeListener: () => {},
+  value: (media) => ({
     addEventListener: () => {},
-    removeEventListener: () => {},
+    addListener: () => {},
     dispatchEvent: () => {},
-  })
+    matches: false,
+    media,
+    onchange: null,
+    removeEventListener: () => {},
+    removeListener: () => {},
+  }),
+
+  writable: true,
 });
 
 // Mock the useTodoStore hook
@@ -39,15 +43,28 @@ describe('HomePage component', () => {
     }));
   });
 
-  it('renders loading state initially', async () => {
+  it('renders loading state initially', () => {
     getTodoListMock.mockResolvedValueOnce([]);
+
     const { getByText } = render(<Home />);
+
     expect(getByText('Loading...')).toBeInTheDocument();
   });
 
   it('eventually renders To-do List Manager', async () => {
-    getTodoListMock.mockResolvedValueOnce([{ id: 1, title: 'My List', description: 'My Description', items: [] }]);
+    getTodoListMock.mockResolvedValueOnce([
+      {
+        description: 'My Description',
+        id: 1,
+        items: [],
+        title: 'My List',
+      },
+    ]);
+
     const { getByText } = render(<Home />);
-    await waitFor(() => expect(getByText('To-do List Manager')).toBeInTheDocument());
+
+    await waitFor(() => {
+      expect(getByText('To-do List Manager')).toBeInTheDocument();
+    });
   });
 });

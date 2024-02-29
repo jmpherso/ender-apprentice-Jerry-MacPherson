@@ -2,7 +2,8 @@
   "name": "@ender-apprentice/shared/data/todo-list",
   "version": "0.0.1",
   "dependencies": {
-    "@swc/helpers": "~0.5.2"
+    "@swc/helpers": "~0.5.2",
+    "@ender-apprentice/shared/types/todo-list": "0.0.1"
   },
   "type": "commonjs",
   "main": "./src/index.js",

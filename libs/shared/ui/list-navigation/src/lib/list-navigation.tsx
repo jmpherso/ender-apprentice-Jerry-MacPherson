@@ -1,20 +1,21 @@
-import AddIcon from '@mui/icons-material/Add';
-import styles from './list-navigation.module.css';
-import { Button} from "../../../../../../components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../../../../../components/ui/tooltip"
-import { useState } from 'react';
-import { Modal } from '@ender-apprentice/shared/ui/modal';
-import { TodoListType } from '@ender-apprentice/shared/types/todo-list';
-import { TodoListForm } from '@ender-apprentice/shared/ui/todo-list-form';
+import type { TodoListType } from '@ender-apprentice/shared/types/todo-list';
 import { ListNavigationItem } from '@ender-apprentice/shared/ui/list-navigation-item';
+import { Modal } from '@ender-apprentice/shared/ui/modal';
+import { TodoListForm } from '@ender-apprentice/shared/ui/todo-list-form';
+import { Button } from '../../../../../../components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../../../../components/ui/tooltip';
+import AddIcon from '@mui/icons-material/Add';
+import { useState } from 'react';
 
-type ListNavigationProps = {
+import styles from './list-navigation.module.css';
+
+interface ListNavigationProps {
+  changeSelectedListId: (id: number) => void;
   lists: TodoListType[];
   selectedListId: number;
-  changeSelectedListId: (id: number) => void;
-};
+}
 
-function ListNavigation({ lists, selectedListId, changeSelectedListId }: ListNavigationProps) {
+function ListNavigation({ changeSelectedListId, lists, selectedListId }: ListNavigationProps) {
   const [modalOpened, setModalOpened] = useState<boolean>(false);
 
   const openModal = (): void => {
@@ -43,7 +44,7 @@ function ListNavigation({ lists, selectedListId, changeSelectedListId }: ListNav
           <Tooltip>
             <TooltipTrigger asChild>
               <Button data-testid="add-list-button" onClick={openModal} variant="outline">
-                <AddIcon/>
+                <AddIcon />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -53,8 +54,8 @@ function ListNavigation({ lists, selectedListId, changeSelectedListId }: ListNav
         </TooltipProvider>
       </div>
       <div className={styles.navbarMain}>{navList}</div>
-      <Modal opened={modalOpened} onClose={closeModal} title={'New list'}>
-        <TodoListForm closeModal={closeModal}/>
+      <Modal onClose={closeModal} opened={modalOpened} title={'New list'}>
+        <TodoListForm closeModal={closeModal} />
       </Modal>
     </nav>
   );

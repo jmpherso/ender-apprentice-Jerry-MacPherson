@@ -110,8 +110,3 @@ describe('Todo Store', () => {
     expect(updateList).toHaveBeenCalledWith(list);
   });
 });
-
-
-
-
-

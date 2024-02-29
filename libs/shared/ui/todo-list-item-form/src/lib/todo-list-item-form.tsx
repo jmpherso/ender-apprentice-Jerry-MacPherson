@@ -1,5 +1,5 @@
 import { TextInput, Textarea } from '@mantine/core';
-import { Button} from "../../../../../../components/ui/button"
+import { Button } from '../../../../../../components/ui/button';
 import { useState } from 'react';
 import { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-item';
 import { useTodoStore } from '@ender-apprentice/shared/stores/todo';
@@ -8,7 +8,7 @@ import styles from './todo-list-item-form.module.css';
 type TodoListItemFormProps = {
   item?: TodoListItemType;
   listId: number;
-  closeModal?: () => void
+  closeModal?: () => void;
 };
 
 interface FormData {
@@ -33,7 +33,7 @@ function TodoListItemForm({ listId, item, closeModal }: TodoListItemFormProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    if(item) {
+    if (item) {
       store.updateTodo({
         ...item,
         title: formData.itemName,

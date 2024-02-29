@@ -5,6 +5,7 @@ node_modules/
 tmp/
 **/package-lock.json
 **/pnpm-lock.yaml
+*.spec.tsx
 
 # lambdas
 serverless/

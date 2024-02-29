@@ -1,114 +1,120 @@
-import { TodoListType } from '@ender-apprentice/shared/types/todo-list';
+import type { TodoListType } from '@ender-apprentice/shared/types/todo-list';
 
 const todoListData: TodoListType[] = [
-  { title: 'Some feature!', id: 0, description: 'lore ipsum dolor etc etc etc', items: [] },
+  { description: 'lore ipsum dolor etc etc etc', id: 0, items: [], title: 'Some feature!' },
   {
-    title: 'Apprenticeship Program',
+    description: 'lore ipsum dolor etc etc etc',
     id: 1,
-    description: 'lore ipsum dolor etc etc etc',
+
     items: [
       {
+        description: 'lore ipsum dolor',
+        id: 0,
+        isComplete: true,
+        listId: 1,
         title: 'item 1',
-        id: 0,
-        description: 'lore ipsum dolor',
-        listId: 1,
-        isComplete: true,
       },
       {
-        title: 'item 2',
-        id: 1,
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        listId: 1,
+
+        id: 1,
         isComplete: false,
+        listId: 1,
+        title: 'item 2',
       },
       {
-        title: 'item 3',
-        id: 2,
         description: 'lore ipsum dolor',
-        listId: 1,
+        id: 2,
         isComplete: false,
+        listId: 1,
+        title: 'item 3',
       },
     ],
+
+    title: 'Apprenticeship Program',
   },
   {
-    title: 'VA Onboarding',
-    id: 2,
     description: 'lore ipsum dolor etc etc etc',
+    id: 2,
+
     items: [
       {
-        title: 'item 4',
-        id: 0,
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        listId: 2,
+
+        id: 0,
         isComplete: true,
+        listId: 2,
+        title: 'item 4',
       },
       {
-        title: 'item 5',
+        description: 'lore ipsum dolor',
         id: 1,
-        description: 'lore ipsum dolor',
-        listId: 2,
         isComplete: true,
+        listId: 2,
+        title: 'item 5',
       },
       {
-        title: 'item 6',
-        id: 2,
         description: 'lore ipsum dolor',
-        listId: 2,
+        id: 2,
         isComplete: true,
+        listId: 2,
+        title: 'item 6',
       },
     ],
+
+    title: 'VA Onboarding',
   },
   {
-    title: 'Code Review Process Improvement',
+    description: 'lore ipsum dolor etc etc etc',
     id: 3,
-    description: 'lore ipsum dolor etc etc etc',
     items: [],
+    title: 'Code Review Process Improvement',
   },
   {
-    title: 'Single Point APIs',
+    description: 'lore ipsum dolor etc etc etc',
     id: 4,
-    description: 'lore ipsum dolor etc etc etc',
     items: [],
+    title: 'Single Point APIs',
   },
   {
-    title: 'Pubsite Overhaul',
+    description: 'lore ipsum dolor etc etc etc',
     id: 5,
-    description: 'lore ipsum dolor etc etc etc',
     items: [],
+    title: 'Pubsite Overhaul',
   },
   {
-    title: 'Frontend Interview Challenge',
+    description: 'lore ipsum dolor etc etc etc',
     id: 6,
-    description: 'lore ipsum dolor etc etc etc',
     items: [],
+    title: 'Frontend Interview Challenge',
   },
   {
-    title: 'Extremely Long todo list title name just checking to see what happens',
+    description: 'lore ipsum dolor etc etc etc',
     id: 10,
-    description: 'lore ipsum dolor etc etc etc',
     items: [],
+    title: 'Extremely Long todo list title name just checking to see what happens',
   },
   {
-    title: 'Design System Migration',
+    description: 'lore ipsum dolor etc etc etc',
     id: 7,
-    description: 'lore ipsum dolor etc etc etc',
     items: [],
+    title: 'Design System Migration',
   },
   {
-    title: 'Playwright Fixtures',
+    description: 'lore ipsum dolor etc etc etc',
     id: 8,
-    description: 'lore ipsum dolor etc etc etc',
     items: [],
+    title: 'Playwright Fixtures',
   },
   {
-    title: 'Tanstack Table Migration',
-    id: 9,
     description: 'lore ipsum dolor etc etc etc',
+    id: 9,
     items: [],
+    title: 'Tanstack Table Migration',
   },
-  { title: 'scroll????', id: 11, description: 'lore ipsum dolor etc etc etc', items: [] },
+  { description: 'lore ipsum dolor etc etc etc', id: 11, items: [], title: 'scroll????' },
 ];
 
 export { todoListData };

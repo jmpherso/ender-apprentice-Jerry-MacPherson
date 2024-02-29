@@ -3,8 +3,8 @@ import { Modal } from '@ender-apprentice/shared/ui/modal';
 import { TodoListForm } from '@ender-apprentice/shared/ui/todo-list-form';
 import { TodoListItem } from '@ender-apprentice/shared/ui/todo-list-item';
 import { TodoListItemForm } from '@ender-apprentice/shared/ui/todo-list-item-form';
-import { Button} from "../../../../../../components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../../../../../components/ui/tooltip"
+import { Button } from '../../../../../../components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../../../../components/ui/tooltip';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 
@@ -55,26 +55,24 @@ function TodoList({ list }: TodoListProps) {
       </div>
       <div> {list.description} </div>
       <div className={styles.listItems}>
-        {showCompleteItems ? (
-          list.items.map((item, index) => <TodoListItem key={index} item={item} />)
-        ) : (
-          list.items
-            .filter((item) => !item.isComplete)
-            .map((item, index) => <TodoListItem key={index} item={item} />)
-        )}
+        {showCompleteItems
+          ? list.items.map((item, index) => <TodoListItem item={item} key={index} />)
+          : list.items
+              .filter((item) => !item.isComplete)
+              .map((item, index) => <TodoListItem item={item} key={index} />)}
       </div>
       <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button onClick={openListItemModal}>
-                <AddIcon/>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className={styles.tooltipContent}>Add new item</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button onClick={openListItemModal}>
+              <AddIcon />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p className={styles.tooltipContent}>Add new item</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <Modal onClose={closeListModal} opened={listModalOpened} title={'Edit list'}>
         <TodoListForm closeModal={closeListModal} list={list} />
       </Modal>
