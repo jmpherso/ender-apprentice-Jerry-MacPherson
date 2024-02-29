@@ -4,24 +4,29 @@ import type { TodoListItemType } from '@ender-apprentice/shared/types/todo-list-
 import { create } from 'zustand';
 
 interface StoreState {
-  todoListData: TodoListType[];
+  todoListData: readonly TodoListType[];
 }
 
 interface StoreActions {
-  createList: (list: Omit<TodoListType, 'id'>) => TodoListType;
-  createTodo: (todo: Omit<TodoListItemType, 'id'> & { listId: number }) => TodoListItemType;
-  getTodoList: () => TodoListType[];
+  createList: (list: Readonly<Omit<TodoListType, 'id'>>) => TodoListType; // Made parameter read-only
+  createTodo: (todo: Readonly<Omit<TodoListItemType, 'id'> & { listId: number }>) => TodoListItemType; // Made parameter read-only
+  getTodoList: () => readonly TodoListType[];
   getTodoListById: (id: number) => TodoListType | undefined;
-  updateList: (list: TodoListType) => void;
-  updateTodo: (item: TodoListItemType) => void;
+  updateList: (list: Readonly<TodoListType>) => void; // Made parameter read-only
+  updateTodo: (item: Readonly<TodoListItemType>) => void; // Made parameter read-only
 }
 
+const notFoundIndex = -1; // Named constant for magic number -1
+
+/* eslint-disable total-functions/no-unsafe-readonly-mutable-assignment */ // Allow mutable assignment for zustand
 const useTodoStore = create<StoreActions & StoreState>((set, get) => ({
-  createList: (list: Omit<TodoListType, 'id'>) => {
+  createList: (list: Readonly<Omit<TodoListType, 'id'>>) => {
+    // Made parameter read-only
+
     let newId = 0;
 
     set((state) => {
-      newId = state.todoListData.reduce((maxId, list) => Math.max(list.id, maxId), -1) + 1;
+      newId = state.todoListData.reduce((maxId, currentList) => Math.max(currentList.id, maxId), notFoundIndex) + 1;
 
       const newList = { ...list, id: newId };
 
@@ -33,8 +38,9 @@ const useTodoStore = create<StoreActions & StoreState>((set, get) => ({
 
     return { ...list, id: newId };
   },
+  /* eslint-enable total-functions/no-unsafe-readonly-mutable-assignment */
 
-  createTodo: (todo: Omit<TodoListItemType, 'id'> & { listId: number }) => {
+  createTodo: (todo: Readonly<Omit<TodoListItemType, 'id'>> & { listId: number }) => {
     let newItemId = 0;
 
     set((state) => {
@@ -44,7 +50,7 @@ const useTodoStore = create<StoreActions & StoreState>((set, get) => ({
 
       const listIndex = state.todoListData.findIndex((list) => list.id === todo.listId);
 
-      if (listIndex !== -1) {
+      if (listIndex !== notFoundIndex) {
         const newList = { ...state.todoListData[listIndex] };
 
         newList.items = newList.items ? [...newList.items, newItem] : [newItem];
@@ -76,7 +82,7 @@ const useTodoStore = create<StoreActions & StoreState>((set, get) => ({
     set((state) => {
       const listIndex = state.todoListData.findIndex((list) => list.id === updatedList.id);
 
-      if (listIndex !== -1) {
+      if (listIndex !== notFoundIndex) {
         return {
           ...state,
 
@@ -96,10 +102,10 @@ const useTodoStore = create<StoreActions & StoreState>((set, get) => ({
     set((state) => {
       const listIndex = state.todoListData.findIndex((list) => list.id === item.listId);
 
-      if (listIndex !== -1) {
+      if (listIndex !== notFoundIndex) {
         const itemIndex = state.todoListData[listIndex]?.items.findIndex((index) => index.id === item.id);
 
-        if (itemIndex !== -1) {
+        if (itemIndex !== notFoundIndex) {
           const newList = { ...state.todoListData[listIndex] };
 
           newList.items = [...newList.items.slice(0, itemIndex), item, ...newList.items.slice(itemIndex + 1)];

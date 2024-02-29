@@ -10,26 +10,27 @@ import { useState } from 'react';
 import styles from './list-navigation.module.css';
 
 interface ListNavigationProps {
-  changeSelectedListId: (id: number) => void;
-  lists: TodoListType[];
-  selectedListId: number;
+  readonly changeSelectedListId: (id: number) => void;
+  readonly lists: readonly TodoListType[]; // Adjusted for readonly type example
+  readonly selectedListId: number;
 }
 
 function ListNavigation({ changeSelectedListId, lists, selectedListId }: ListNavigationProps) {
-  const [modalOpened, setModalOpened] = useState<boolean>(false);
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false); // Renamed following naming convention
 
   const openModal = (): void => {
-    setModalOpened(true);
+    setIsModalOpened(true);
   };
 
   const closeModal = (): void => {
-    setModalOpened(false);
+    setIsModalOpened(false);
   };
 
   const navList = lists.map((list, index) => (
     <div
       key={index}
-      onClick={(event) => {
+      onClick={() => {
+        // Removed unused 'event' parameter
         changeSelectedListId(list.id);
       }}>
       <ListNavigationItem list={list} selectedListId={selectedListId} />
@@ -54,7 +55,7 @@ function ListNavigation({ changeSelectedListId, lists, selectedListId }: ListNav
         </TooltipProvider>
       </div>
       <div className={styles.navbarMain}>{navList}</div>
-      <Modal onClose={closeModal} opened={modalOpened} title={'New list'}>
+      <Modal onClose={closeModal} opened={isModalOpened} title={'New list'}>
         <TodoListForm closeModal={closeModal} />
       </Modal>
     </nav>

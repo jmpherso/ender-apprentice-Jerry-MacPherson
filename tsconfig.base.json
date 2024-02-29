@@ -19,6 +19,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "typeRoots": ["node_modules/@types", "libs/shared/types"],
     "paths": {
       //"@/*": ["./*"],
       "@ender-apprentice/pages/home": ["libs/pages/home/src/index.ts"],
@@ -33,7 +34,8 @@
       "@ender-apprentice/shared/ui/todo-list": ["libs/shared/ui/todo-list/src/index.ts"],
       "@ender-apprentice/shared/ui/todo-list-form": ["libs/shared/ui/todo-list-form/src/index.ts"],
       "@ender-apprentice/shared/ui/todo-list-item": ["libs/shared/ui/todo-list-item/src/index.ts"],
-      "@ender-apprentice/shared/ui/todo-list-item-form": ["libs/shared/ui/todo-list-item-form/src/index.ts"],
+      "@ender-apprentice/shared/components/button": ["libs/shared/components/button.tsx"],
+      "@ender-apprentice/shared/components/tooltip": ["libs/shared/components/tooltip.tsx"],
     }
   },
   "exclude": ["node_modules", "tmp"]
